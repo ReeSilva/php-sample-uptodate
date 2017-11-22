@@ -1,0 +1,19 @@
+{
+    "family": "php-sample",
+    "containerDefinitions": [
+        {
+            "name": "test",
+            "image": "reesilva/php-sample-uptodate",
+            "memory": 256,
+            "memoryReservation": 128,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 0
+                }
+            ],
+            "essential": true,
+            "workingDirectory": "/var/www/html"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "cluster": "default",
+    "service": "php-sample",
+    "taskDefinition": "php-sample",
+    "deploymentConfiguration": {
+        "maximumPercent": 200,
+        "minimumHealthyPercent": 50
+    },
+    "desiredCount": 1
+}
