@@ -1,32 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Simple PHP App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-        <style>body {margin-top: 40px; background-color: #333;}</style>
-        <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    </head>
+require __DIR__ . '/vendor/autoload.php';
 
-    <body>
-        <div class="container">
-            <div class="hero-unit">
-                <h1>Simple PHP App</h1>
-                <h2>Congratulations</h2>
-		<h3>Version 7.0 </h3>
-		<h4>Autobuild configured</h4>
-                <p>Your PHP application is now running on a container.</p>
-                <p>The container is running PHP version <?php echo phpversion(); ?>.</p>
+use \Uptodate\Example;
 
-            </div>
-        </div>
+class Index {
+    protected $loader;
+    protected $twig;
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-    </body>
+    public function __construct() {
+        $this->loader = new Twig_Loader_Filesystem(__DIR__ . '/views');
+        $this->twig = new Twig_Environment($this->loader);
+    }
+    
+    public function index() {
+        $example = new Example();
+        $phpver = $example->getPhpVersion();
+        $template = $this->twig->render('home.twig.html', array('phpversion' => $phpver, 'env' => $_ENV['STAGE']));
+        return $template;
+    }
+}
 
-</html>
+$index = new Index();
+echo $index->index();
