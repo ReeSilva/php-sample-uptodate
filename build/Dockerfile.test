@@ -1,4 +1,4 @@
-FROM php:apache
+FROM php
 MAINTAINER Renato Biancalana da Silva <renato.biancalana.silva@gmail.com>
 
 RUN apt-get update
